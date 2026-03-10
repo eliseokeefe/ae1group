@@ -1,17 +1,6 @@
--- =============================================================================
--- CAMPUS FOOD WASTE TRACKER — SEED DATA
--- Realistic sample data for all 7 tables
--- =============================================================================
--- Data volumes:  5 Dining Halls, 55 Food Items, 18 Volunteers,
---               25 Waste Logs, 3 Food Banks, 12 Donations, 15 Hall Assignments
--- =============================================================================
 
 PRAGMA foreign_keys = ON;
 
-
--- =============================================================================
--- DiningHalls (5 campus facilities)
--- =============================================================================
 INSERT INTO DiningHalls (Name, Location, OperatingHours) VALUES
     ('The Great Hall',       'Main Campus, Building A',        '07:00-21:00'),
     ('Lakeside Bistro',      'Lakeside Residence Block',       '07:30-20:30'),
@@ -19,14 +8,6 @@ INSERT INTO DiningHalls (Name, Location, OperatingHours) VALUES
     ('The Green Kitchen',    'Sustainability Centre',          '08:00-18:00'),
     ('Arts & Social Eatery', 'Arts Faculty, West Wing',        '07:30-20:00');
 
-
--- =============================================================================
--- FoodItems (55 items across 3 categories)
--- Carbon footprint values sourced from published lifecycle assessment data
--- (kg CO2 equivalent per kg of food)
--- =============================================================================
-
--- Category: 'prepared' — Cooked dishes and ready-to-eat meals (20 items)
 INSERT INTO FoodItems (Name, Category, NutritionalInfo, CarbonFootprintPerUnit) VALUES
     ('Grilled Chicken Breast',            'prepared', 'Cal:165 P:31g C:0g F:3.6g',     6.90),
     ('Beef Lasagne',                      'prepared', 'Cal:135 P:8.5g C:11g F:6.5g',   27.00),
@@ -49,7 +30,6 @@ INSERT INTO FoodItems (Name, Category, NutritionalInfo, CarbonFootprintPerUnit) 
     ('Mediterranean Grilled Vegetables',  'prepared', 'Cal:95 P:3g C:12g F:4.5g',      1.80),
     ('Egg Fried Rice',                    'prepared', 'Cal:190 P:7g C:30g F:5g',       4.80);
 
--- Category: 'raw' — Unprocessed ingredients used in meal preparation (20 items)
 INSERT INTO FoodItems (Name, Category, NutritionalInfo, CarbonFootprintPerUnit) VALUES
     ('Fresh Chicken (whole)',             'raw', 'Cal:215 P:18g C:0g F:15g',      6.90),
     ('Beef Mince',                        'raw', 'Cal:250 P:17g C:0g F:20g',      27.00),
@@ -72,7 +52,6 @@ INSERT INTO FoodItems (Name, Category, NutritionalInfo, CarbonFootprintPerUnit) 
     ('Dried Pasta (penne)',               'raw', 'Cal:350 P:12g C:72g F:1.5g',    1.20),
     ('Garlic',                            'raw', 'Cal:149 P:6.4g C:33g F:0.5g',   0.60);
 
--- Category: 'packaged' — Pre-packaged snacks, drinks, sealed items (15 items)
 INSERT INTO FoodItems (Name, Category, NutritionalInfo, CarbonFootprintPerUnit) VALUES
     ('Bottled Water 500ml',               'packaged', 'Cal:0 P:0g C:0g F:0g',         0.30),
     ('Orange Juice Carton 1L',            'packaged', 'Cal:42 P:0.7g C:9g F:0.1g',    0.80),
@@ -91,9 +70,6 @@ INSERT INTO FoodItems (Name, Category, NutritionalInfo, CarbonFootprintPerUnit) 
     ('Trail Mix 200g',                    'packaged', 'Cal:480 P:14g C:45g F:28g',    2.20);
 
 
--- =============================================================================
--- Volunteers (18 student volunteers)
--- =============================================================================
 INSERT INTO Volunteers (Name, ContactInfo, Role) VALUES
     ('Aisha Khan',          'a.khan@student.uni.ac.uk',         'Coordinator'),
     ('Liam O''Brien',       'l.obrien@student.uni.ac.uk',       'Sorter'),
@@ -115,18 +91,12 @@ INSERT INTO Volunteers (Name, ContactInfo, Role) VALUES
     ('Isabella Martinez',   'i.martinez@student.uni.ac.uk',     'Analyst');
 
 
--- =============================================================================
--- FoodBanks (3 partner organisations)
--- =============================================================================
+
 INSERT INTO FoodBanks (Name, Location, PickupSchedule) VALUES
     ('City Harvest London',       '15 Bermondsey Street, SE1 3TQ',  'Mon/Thu 14:00'),
     ('FareShare Greater London',  'Unit 8, Imperial Way, NW10 7PA', 'Tue/Fri 15:00'),
     ('The Felix Project',         '43 Enfield Road, N1 5RP',        'Wed/Fri 13:00');
 
-
--- =============================================================================
--- WasteLogs (25 records spanning Jan–Mar 2026)
--- =============================================================================
 INSERT INTO WasteLogs (HallID, ItemID, Quantity, LogDate, WasteType) VALUES
     -- January 2026
     (1, 1,  8.5,  '2026-01-13', 'overproduction'),
@@ -158,28 +128,21 @@ INSERT INTO WasteLogs (HallID, ItemID, Quantity, LogDate, WasteType) VALUES
     (2, 20, 3.0,  '2026-03-09', 'plate_waste');
 
 
--- =============================================================================
--- Donations (12 records — linked to overproduction waste logs)
--- Only edible surplus (overproduction) is donated; spoiled/expired is not.
--- =============================================================================
 INSERT INTO Donations (LogID, BankID, Quantity, PickupTime, Status) VALUES
-    (1,  1, 5.0,  '2026-01-13 14:00', 'Delivered'),      -- Grilled chicken surplus
-    (4,  2, 2.5,  '2026-01-15 15:00', 'Delivered'),      -- Stir fry surplus
-    (7,  1, 6.0,  '2026-01-17 14:00', 'Delivered'),      -- Spaghetti surplus
-    (9,  3, 4.0,  '2026-02-03 13:00', 'Delivered'),      -- Fish & chips surplus
-    (13, 2, 3.0,  '2026-02-07 15:00', 'Delivered'),      -- Vegan mac surplus
-    (17, 1, 3.5,  '2026-02-13 14:00', 'Delivered'),      -- Jacket potato surplus
-    (19, 3, 4.5,  '2026-03-03 13:00', 'Delivered'),      -- Chicken tikka surplus
-    (22, 2, 2.5,  '2026-03-06 15:00', 'Picked Up'),      -- Grilled veg surplus
-    (1,  3, 2.0,  '2026-01-13 16:00', 'Delivered'),      -- Second pickup for same log
-    (7,  2, 2.0,  '2026-01-17 15:00', 'Delivered'),      -- Second pickup for same log
-    (9,  1, 2.0,  '2026-02-03 14:00', 'Scheduled'),      -- Scheduled for pickup
-    (22, 1, 1.5,  '2026-03-06 14:00', 'Pending');        -- Pending pickup
+    (1,  1, 5.0,  '2026-01-13 14:00', 'Delivered'),     
+    (4,  2, 2.5,  '2026-01-15 15:00', 'Delivered'),     
+    (7,  1, 6.0,  '2026-01-17 14:00', 'Delivered'),     
+    (9,  3, 4.0,  '2026-02-03 13:00', 'Delivered'),      
+    (13, 2, 3.0,  '2026-02-07 15:00', 'Delivered'),     
+    (17, 1, 3.5,  '2026-02-13 14:00', 'Delivered'),      
+    (19, 3, 4.5,  '2026-03-03 13:00', 'Delivered'),     
+    (22, 2, 2.5,  '2026-03-06 15:00', 'Picked Up'),      
+    (1,  3, 2.0,  '2026-01-13 16:00', 'Delivered'),     
+    (7,  2, 2.0,  '2026-01-17 15:00', 'Delivered'),      
+    (9,  1, 2.0,  '2026-02-03 14:00', 'Scheduled'),      
+    (22, 1, 1.5,  '2026-03-06 14:00', 'Pending');        
 
 
--- =============================================================================
--- HallAssignments (15 volunteer-to-hall assignments)
--- =============================================================================
 INSERT INTO HallAssignments (HallID, VolunteerID) VALUES
     (1, 1),   -- Aisha at The Great Hall
     (1, 2),   -- Liam at The Great Hall

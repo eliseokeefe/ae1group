@@ -10,6 +10,13 @@ public class Volunteer {
         this.role = role; 
     }
 
+     public Volunteer(int id, String name, String contactInfo, String role){
+        this.id = id;
+        this.name = name;
+        this.contactInfo = contactInfo;
+        this.role = role;
+    }
+
     public String getName(){
         return name; 
     }
@@ -20,5 +27,9 @@ public class Volunteer {
 
     public String getRole(){ 
         return role; 
+    }
+
+     public int getId(){
+        return id;
     }
 }
