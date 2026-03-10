@@ -45,7 +45,6 @@ public class VolunteerFeatures {
                 System.out.println("ID: " + v.getId() + "," + "Name: " + v.getName() + "," + "Contact Information: " + v.getContactInfo() + "," + "Role: " + v.getRole());
 
             }
-
             c.close(); 
         } 
         catch (SQLException e) {
@@ -62,9 +61,9 @@ public class VolunteerFeatures {
 
         statement.setInt(1, id);
 
-        int rowsAffected = statement.executeUpdate();
+        int change = statement.executeUpdate();
 
-        if(rowsAffected > 0){
+        if(change > 0){
             System.out.println("Volunteer deleted successfully.");
         } else {
             System.out.println("No volunteer found with that ID.");

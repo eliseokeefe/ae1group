@@ -7,7 +7,7 @@ public class DatabaseConnection {
     static String link = "jdbc:sqlite:database/foodwaste.db";
 
     public static Connection connect() {
-  try {
+        try {
             Class.forName("org.sqlite.JDBC");  
             Connection c = DriverManager.getConnection(link);
             System.out.println("Connected!");
