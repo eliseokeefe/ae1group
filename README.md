@@ -1,5 +1,5 @@
 # ae1group
-AE1 DBMS 
+AE1 Database Management Systems SP2026
 
 # Description 
 This project builds on an already created database that measures food waste across university dining halls, as well as tracks volunteers who help with this initiative. This program specifically utilizes a Java based command-line interface that connects to a SQLite database that allows you to interact with the Volunteers table. This interface checks for valid inputs before conducting any action.
@@ -22,5 +22,6 @@ This project builds on an already created database that measures food waste acro
 Before data can be added: 
 - Name, contact information, and role cannot be empty 
 - Role must be valid (either Sorter, Coordinator, Driver, Admin, or Analyst)
+
 Before data can be deleted: 
 - The volunteer's ID must exist in the database to be deleted 
