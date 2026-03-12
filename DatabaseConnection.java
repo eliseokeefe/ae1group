@@ -10,7 +10,7 @@ public class DatabaseConnection {
         try {
             Class.forName("org.sqlite.JDBC");  
             Connection c = DriverManager.getConnection(link);
-            System.out.println("Connected!");
+            //System.out.println("Connected!");
             return c;
         }
 
