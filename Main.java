@@ -34,7 +34,7 @@ public class Main {
                                 System.out.println("Enter the volunteer's contact information: ");
                                 contactInfo = in.nextLine(); 
                                 if(contactInfo.trim().isEmpty()){
-                                    System.out.println("The conact information cannot be empty");
+                                    System.out.println("The contact information cannot be empty");
                                     }
                                 else {
                                     contactInfoBool = true; 
